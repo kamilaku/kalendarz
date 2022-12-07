@@ -1,12 +1,10 @@
 import React from 'react';
 import CalendarBox from "./CalendarBox";
+import SelectMonth from './SelectMonth';
 
 const Main = () => {
     return <>
-    <div className='select-range'>
-        <div className='select-month'>select month</div>
-        <div className='select-year'>select year</div>
-    </div>
+    <SelectMonth />
     <CalendarBox />
     </>;
 };
