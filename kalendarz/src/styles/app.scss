@@ -29,12 +29,17 @@ $light-red: #d4a6b0;
     @include header-title;
 }
 
-div {
-    border: 2px solid $dark-blue;
+// div {
+//     border: 2px solid $dark-blue;
+// }
+
+.container {
+    width: 80%;
 }
 
 .select-range {
     display: flex;
+    justify-content: end;
     align-items: flex-end;
     flex-wrap: wrap;
 }
