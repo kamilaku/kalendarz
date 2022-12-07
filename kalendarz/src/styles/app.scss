@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+// @media screen and (max-width: 800px) {
+//     flex-direction: column;
+// }
+
+// @media screen and (min-width: 801px) {
+//     flex-direction: row;
+// }
+
+// @media screen and (min-width: 1024px) {
+//     flex-direction: row;
+// }
+
+$title-font: 'Dancing Script', cursive;
+$dark-blue: #262B62;
+$grey: #8D99AE;
+$light-gray: #edf2f4;
+$red: #d80032;
+$light-red: #d4a6b0;
+
+@mixin header-title {
+    font-family: $title-font;
+    font-size: 30px;
+    color: $dark-blue;
+}
+
+.title {
+    @include header-title;
+}
+
+div {
+    border: 2px solid $dark-blue;
+}
+
+.select-range {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.select-month, .select-year {
+    text-align: center;
+    width: 150px;
+}
+
+.calendar-boxes {
+    max-width: 800px;
+}
