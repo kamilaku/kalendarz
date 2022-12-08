@@ -31,8 +31,29 @@ $light-red: #d4a6b0;
     @include header-title;
 }
 
-div {
-    border: 2px solid $dark-blue;
+// div {
+//     border: 2px solid $dark-blue;
+// }
+
+$margin: 2px;
+.calendar {
+    display: flex;
+    flex-wrap: wrap;
+    padding: $margin;
+    width: calc(100% - (2 * #{$margin}));
+    background-color: #d80032;
+}
+
+.calendar-day {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    font-size: 2rem;
+    margin: $margin;
+    width: calc((100% / 7) - (2 * #{$margin}));
+    background-color: #d4a6b0;
 }
 
 select {
@@ -51,4 +72,8 @@ select {
 
 .calendar-boxes {
     max-width: 800px;
+}
+
+.App {
+    width: 80%;
 }

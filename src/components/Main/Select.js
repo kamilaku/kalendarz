@@ -26,6 +26,4 @@ const Select = ({def, data, handleSelect}) => {
     )
 }
 
-
-
 export default Select;
