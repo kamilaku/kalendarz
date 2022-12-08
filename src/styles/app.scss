@@ -6,10 +6,12 @@
 
 // @media screen and (min-width: 801px) {
 //     flex-direction: row;
+//     flex-wrap: wrap;    
 // }
 
 // @media screen and (min-width: 1024px) {
 //     flex-direction: row;
+//     flex-wrap: wrap;   
 // }
 
 $title-font: 'Dancing Script', cursive;
@@ -29,24 +31,22 @@ $light-red: #d4a6b0;
     @include header-title;
 }
 
-// div {
-//     border: 2px solid $dark-blue;
-// }
+div {
+    border: 2px solid $dark-blue;
+}
+
+select {
+    width: 150px;
+}
 
 .container {
     width: 80%;
 }
 
-.select-range {
+.selects {
     display: flex;
     justify-content: end;
     align-items: flex-end;
-    flex-wrap: wrap;
-}
-
-.select-month, .select-year {
-    text-align: center;
-    width: 150px;
 }
 
 .calendar-boxes {
