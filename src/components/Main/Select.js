@@ -15,14 +15,14 @@ const Select = ({def, data, handleSelect}) => {
     );
 
     return ( 
-        <div className='container'>
+        <>
             <select 
                 value={selected}
                 className='select' 
                 onChange={choose}
             >{options}
             </select>
-        </div>
+        </>
     )
 }
 

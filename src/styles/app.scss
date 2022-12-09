@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 
+$title-font: 'Dancing Script', cursive;
+$dark-blue: #262B62;
+$grey: #8D99AE;
+$light-gray: #edf2f4;
+$red: #d80032;
+$light-red: #d4a6b0;
+$margin: 2px;
+
 // @media screen and (max-width: 800px) {
 //     flex-direction: column;
 // }
@@ -14,17 +22,15 @@
 //     flex-wrap: wrap;   
 // }
 
-$title-font: 'Dancing Script', cursive;
-$dark-blue: #262B62;
-$grey: #8D99AE;
-$light-gray: #edf2f4;
-$red: #d80032;
-$light-red: #d4a6b0;
+.App {
+    width: 80%;
+}
 
 @mixin header-title {
     font-family: $title-font;
-    font-size: 30px;
+    font-size: 40px;
     color: $dark-blue;
+    margin: 70px auto 10px 30px;
 }
 
 .title {
@@ -35,13 +41,12 @@ $light-red: #d4a6b0;
 //     border: 2px solid $dark-blue;
 // }
 
-$margin: 2px;
 .calendar {
     display: flex;
     flex-wrap: wrap;
     padding: $margin;
     width: calc(100% - (2 * #{$margin}));
-    background-color: #d80032;
+    justify-content: center;
 }
 
 .calendar-day {
@@ -53,27 +58,20 @@ $margin: 2px;
     font-size: 2rem;
     margin: $margin;
     width: calc((100% / 7) - (2 * #{$margin}));
-    background-color: #d4a6b0;
+    background-color: $grey;
 }
 
 select {
     width: 150px;
 }
 
-.container {
-    width: 80%;
-}
-
 .selects {
     display: flex;
     justify-content: end;
     align-items: flex-end;
+    padding: 30px 0px;
 }
 
 .calendar-boxes {
     max-width: 800px;
-}
-
-.App {
-    width: 80%;
 }
