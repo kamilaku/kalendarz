@@ -1,12 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
-$title-font: 'Dancing Script', cursive;
+$main-font: 'Lobster', cursive;
 $dark-blue: #262B62;
-$grey: #8D99AE;
+$grey: #8d99ae;
 $light-gray: #edf2f4;
 $red: #d80032;
 $light-red: #d4a6b0;
-$margin: 2px;
+$day-margin: 2px;
+$day-padding: 5px;
+$shadow: 4px 4px 16px rgb(0 0 0 / 46%);
 
 // @media screen and (max-width: 800px) {
 //     flex-direction: column;
@@ -22,15 +24,33 @@ $margin: 2px;
 //     flex-wrap: wrap;   
 // }
 
-.App {
-    width: 80%;
-}
+
 
 @mixin header-title {
-    font-family: $title-font;
-    font-size: 40px;
-    color: $dark-blue;
+    font-size: 3rem;
     margin: 70px auto 10px 30px;
+    text-shadow: $shadow;
+}
+
+@mixin choose {
+    width: 200px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    background-color: $red;
+    border-color: $red;
+    color: $light-gray;
+    text-align: center;
+    padding: 8px;
+    font-family: $main-font;
+    letter-spacing: 1px;
+    margin: 5px;
+}
+
+.App {
+    width: 80%;
+    max-width: 800px;
+    font-family: $main-font;
+    color: $dark-blue;
 }
 
 .title {
@@ -44,25 +64,35 @@ $margin: 2px;
 .calendar {
     display: flex;
     flex-wrap: wrap;
-    padding: $margin;
-    width: calc(100% - (2 * #{$margin}));
+    padding: $day-margin;
+    width: calc(100% - (2 * #{$day-margin}));
     justify-content: center;
 }
 
 .calendar-day {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     height: 80px;
-    font-size: 2rem;
-    margin: $margin;
-    width: calc((100% / 7) - (2 * #{$margin}));
+    font-size: 1rem;
+    margin: $day-margin;
+    width: calc((100% / 7) - (2 * #{$day-margin}) - (2 * #{$day-padding}));
+    border-radius: 7px;
+    box-shadow: $shadow;
+    padding: $day-padding;
+    
+    &.current-day {
+        background-color: $dark-blue;
+    }
+}
+
+.currentMonthDay {
     background-color: $grey;
 }
 
-select {
-    width: 150px;
+.otherMonthDay {
+    background-color: $light-gray;
 }
 
 .selects {
@@ -72,6 +102,15 @@ select {
     padding: 30px 0px;
 }
 
+.select {
+    @include choose;
+}
+
 .calendar-boxes {
     max-width: 800px;
+}
+
+.weekdays {
+    display: flex;
+    font-size: 1.5rem;
 }

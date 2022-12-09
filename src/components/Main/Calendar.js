@@ -5,11 +5,16 @@ const Calendar = ({year, month}) => {
 
     const getDatesByRange = (startDate, endDate) => {
         const date = new Date(startDate.getTime());
+        const today = new Date(); // todo
         const dates = [];
       
         while (date <= endDate) {
-          dates.push(new Date(date));
-          date.setDate(date.getDate() + 1);
+            dates.push({
+                isCurrentDay: false,
+                isSelectedMonth: date.getFullYear() === year && date.getMonth() === month,
+                date: new Date(date),
+            });
+            date.setDate(date.getDate() + 1);
         }
       
         return dates;
@@ -59,8 +64,13 @@ const Calendar = ({year, month}) => {
     return <>
         <div className='calendar'>
         {
-            days.map((date) => (
-                <div key={date.getTime()} className='calendar-day'>{date.getDate()}</div>
+            days.map((day) => (
+                <div 
+                    key={day.date.getTime()} 
+                    className={`calendar-day ${day.isSelectedMonth ? 'currentMonthDay' : 'otherMonthDay'}${day.isCurrentDay ? ' current-day' : ''}`}
+                >
+                    {day.date.getDate()}
+                </div>
             ))
         }  
         </div>

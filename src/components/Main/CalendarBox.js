@@ -23,6 +23,15 @@ const CalendarBox = () => {
             <Select def={year} data={yearsOptions} handleSelect={changeYear} />
             <Select def={monthOptions[month].value} data={monthOptions} handleSelect={changeMonth} />
         </div>
+        <div className='weekdays'>
+            <div className='dayWeek'>PN</div>
+            <div className='dayWeek'>WT</div>
+            <div className='dayWeek'>ŚR</div>
+            <div className='dayWeek'>CZ</div>
+            <div className='dayWeek'>PT</div>
+            <div className='dayWeek'>SB</div>
+            <div className='dayWeek'>ND</div>
+        </div>
         <Calendar year={year} month={month} />
     </>)
 }
