@@ -69,21 +69,50 @@ $shadow: 4px 4px 16px rgb(0 0 0 / 46%);
     justify-content: center;
 }
 
-.calendar-day {
+.calendar-day { //button
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    height: 80px;
-    font-size: 1rem;
-    margin: $day-margin;
-    width: calc((100% / 7) - (2 * #{$day-margin}) - (2 * #{$day-padding}));
     border-radius: 7px;
     box-shadow: $shadow;
     padding: $day-padding;
+    border: none;
+    width: 100%;
+    height: 100%;
+
+    &-wrapper { //div
+        height: 80px;
+        font-size: 1rem;
+        margin: $day-margin;
+        width: calc((100% / 7) - (2 * #{$day-margin}));
+    }
+
+    &-details-wrapper {
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 50%);
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: none;
+        
+        &.show {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &-details {
+        background: #d4a6b0;
+        width: 60vw;
+        height: 80vh;
+    }
     
     &.current-day {
-        background-color: $dark-blue;
+        border: 5px dotted $red;
     }
 }
 
@@ -97,7 +126,7 @@ $shadow: 4px 4px 16px rgb(0 0 0 / 46%);
 
 .selects {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: flex-end;
     padding: 30px 0px;
 }
