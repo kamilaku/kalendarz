@@ -18,6 +18,16 @@ const CalendarBox = () => {
         setMonth(Number(value));
     };
 
+    const changeDate = (newDate) => {
+        const newYear = Number(newDate.getFullYear());
+        const newMonth = Number(newDate.getMonth());
+
+        if (year !== newYear || month !== newMonth) {
+           setYear(newYear);
+           setMonth(newMonth); 
+        }
+    };
+
     return (<>
         <div className='selects'>
             <Select def={year} data={yearsOptions} handleSelect={changeYear} />
@@ -32,7 +42,7 @@ const CalendarBox = () => {
             <div className='dayWeek'>SB</div>
             <div className='dayWeek'>ND</div>
         </div>
-        <Calendar year={year} month={month} />
+        <Calendar year={year} month={month} handleChangeDate={changeDate} />
     </>)
 }
 

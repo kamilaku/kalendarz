@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import DayDetails from './DayDetails';
 
-const Calendar = ({year, month}) => {
+const Calendar = ({year, month, handleChangeDate}) => {
     const [days, setDays] = useState([]);
     const [selectedDay, setSelectedDay] = useState({});
+    const [localStorageData, setLocalStorageData] = useState(
+        JSON.parse(localStorage.getItem('periodData') ?? '[]')
+    );
 
     useEffect(() => {
-        // [{date: Date, periodDetails}]
-        const periodData = JSON.parse(localStorage.getItem('periodData') ?? '[]');
-        
         const compareDates = (date, dateToCompare) => {
             return date.getFullYear() === dateToCompare.getFullYear() && 
                     date.getMonth() === dateToCompare.getMonth() && 
@@ -16,16 +16,15 @@ const Calendar = ({year, month}) => {
         };
 
         const getDatesByRange = (startDate, endDate) => {
-            const date = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), 0, 0, 0); // new Date(startDate.getTime());
+            const date = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), 0, 0, 0);
             const today = new Date();
             const dates = [];
+            const periodData = localStorageData;
         
             while (date <= endDate) {
-                // item -> {date: Date, periodDetails: {}}
-                // to do add parsing data
-                console.log(date.toJSON().split('T')[0], `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`);
-
-                const findPeriodDetails = periodData.find((item) => date.toJSON().split('T')[0] === item.date.split('T')[0]);
+                const findPeriodDetails = periodData.find((item) => {
+                    return compareDates(date, new Date(item.date));
+                });
     
                 dates.push({
                     isCurrentDay: compareDates(date, today),
@@ -33,6 +32,7 @@ const Calendar = ({year, month}) => {
                     date: new Date(date),
                     periodDetails: findPeriodDetails ? findPeriodDetails.periodDetails : null,
                 });
+
                 date.setDate(date.getDate() + 1);
             }
 
@@ -79,7 +79,7 @@ const Calendar = ({year, month}) => {
         };
 
         genCalendarDates();
-    }, [year, month]);
+    }, [year, month, localStorageData]);
 
     const clickDay = (day) => {
         if (day.isSelectedMonth) {
@@ -88,6 +88,9 @@ const Calendar = ({year, month}) => {
             document.querySelector('.calendar-day-details-wrapper').classList.add('show');
         } else {
             // funkcja do zmieniania miesiąca i roku
+            if (handleChangeDate) {
+                handleChangeDate(day.date);
+            }
         }
     }
 
@@ -98,12 +101,27 @@ const Calendar = ({year, month}) => {
 
     const addDetails = (details) => {
         const data = {
-            date: selectedDay.date,
-            periodDetails: details,
+            ...details,
+            date: (typeof details.date === 'object') ? details.date.getTime() : details.date,
         };
-        const periodData = JSON.parse(localStorage.getItem('periodData') ?? '[]');
-        localStorage.setItem('periodData', JSON.stringify([...periodData, data]))
+        const periodData = localStorageData.filter((item) => item.date !== data.date) ?? [];
+        periodData.push(data);
+        setLocalStorageData(periodData);
+        localStorage.setItem('periodData', JSON.stringify(periodData));
         exitDay();
+    };
+
+    const setIconClass = (value) => {
+        switch (Number(value)) {
+            case 0:
+                return 'small'
+            case 1:
+                return 'medium'
+            case 2:
+                return 'big'
+            default:
+                return '';
+        }
     };
 
     return <>
@@ -116,6 +134,7 @@ const Calendar = ({year, month}) => {
                 >
                     <button onClick={() => clickDay(day)} className={`calendar-day ${day.isSelectedMonth ? 'currentMonthDay' : 'otherMonthDay'} ${day.isCurrentDay ? 'current-day' : ''}`}>
                         {day.date.getDate()}
+                        { (day?.periodDetails?.intensivity >= 0) && <span className={`icon-asset material-symbols-outlined ${setIconClass(day.periodDetails.intensivity)}`}>done</span> }
                     </button>
                 </div>
             ))

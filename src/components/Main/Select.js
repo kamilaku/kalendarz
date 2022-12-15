@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Select = ({def, data, handleSelect}) => {
     const [selected, setSelected] = useState(def);
+
+    useEffect(() => {
+        setSelected(def);
+    }, [def]);
 
     const choose = (event) => {
         setSelected(event.target.value);

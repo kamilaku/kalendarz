@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from './Select';
 
 const DayDetails = ({dayDetails, onCancel, onSave}) => {
-    const [periodDetails, setPeriodDetails] = useState(dayDetails?.periodDetails || {});
-
+    const [details, setDetails] = useState(dayDetails);
     const periodIntensivityOptions = [{value: 0, title:'małe'}, {value: 1, title:'średnie'}, {value: 2, title:'duże'}];
     
+    const formatDate = () => {
+        const date = details?.date?.toLocaleDateString() || '';
+        return date.split('/')?.reverse().join('/') || '';
+    };
+    
     const weekdays = () => {
-        switch (dayDetails.getDay()) {
+        switch (details?.date?.getDay()) {
             case 1: 
                 return 'poniedziałek';
             case 2: 
@@ -28,9 +32,12 @@ const DayDetails = ({dayDetails, onCancel, onSave}) => {
     };
 
     const setIntensivity = (value) => {
-        setPeriodDetails({
-            ...periodDetails,
-            intensivity: Number(value),
+        setDetails({
+            ...details,
+            periodDetails: {
+               ...details.periodDetails,
+                intensivity: Number(value), 
+            },
         });
     };
 
@@ -41,17 +48,28 @@ const DayDetails = ({dayDetails, onCancel, onSave}) => {
     };
 
     const save = () => {
-        if (onSave) {
-            onSave(periodDetails);
+        const data = { ...details };
+        if (data?.periodDetails === null) {
+            data['periodDetails'] = {
+                intensivity: 0,
+            };
         }
-    }
+        // setDetails(data);
+        if (onSave) {
+            onSave(data);
+        }
+    };
+
+    useEffect(() => {
+        setDetails(dayDetails);
+    }, [dayDetails]);
 
     return <>
         <div className='calendar-day-details' >
-            {/* <h1 className='title'>{day.getFullYear()}/{day.getMonth()}/{day.getDate()}</h1> */}
-            <h2 className='title'>{weekdays}</h2>
+            <h1 className='title'>{formatDate()}</h1>
+            <h2 className='title'>{weekdays()}</h2>
             <div className='calendar-day-details-but'>
-                <Select def={periodDetails?.intensivity || 0} data={periodIntensivityOptions} handleSelect={setIntensivity} />
+                <Select def={details?.periodDetails?.intensivity || 0} data={periodIntensivityOptions} handleSelect={setIntensivity} />
                 <button className='addPeriod' onClick={save}>Dodaj miesiączkę</button>
                 <button className='cancel' onClick={cancel}>Anuluj</button>
             </div>
