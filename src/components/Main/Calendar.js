@@ -133,7 +133,9 @@ const Calendar = ({year, month, handleChangeDate}) => {
                     className='calendar-day-wrapper'
                 >
                     <button onClick={() => clickDay(day)} className={`calendar-day ${day.isSelectedMonth ? 'currentMonthDay' : 'otherMonthDay'} ${day.isCurrentDay ? 'current-day' : ''}`}>
-                        {day.date.getDate()}
+                        <span className='day-number'>
+                            {day.date.getDate()}
+                        </span>
                         { (day?.periodDetails?.intensivity >= 0) && <span className={`icon-asset material-symbols-outlined ${setIconClass(day.periodDetails.intensivity)}`}>done</span> }
                     </button>
                 </div>
