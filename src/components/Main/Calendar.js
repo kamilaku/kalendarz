@@ -3,9 +3,9 @@ import DayDetails from './DayDetails';
 
 const Calendar = ({year, month, handleChangeDate}) => {
     const [days, setDays] = useState([]);
-    const [selectedDay, setSelectedDay] = useState({});
+    const [selectedDay, setSelectedDay] = useState({}); //kliknięty dzień
     const [localStorageData, setLocalStorageData] = useState(
-        JSON.parse(localStorage.getItem('periodData') ?? '[]')
+        JSON.parse(localStorage.getItem('periodData') ?? '[]') //zmiana danych na obiekt
     );
 
     useEffect(() => {
@@ -39,6 +39,7 @@ const Calendar = ({year, month, handleChangeDate}) => {
             return dates;
         };
 
+        //ile dni z poprzedniego miesiąca ma być wyświetlone
         const getDaysFromPastMonth = (dayNumber) => {
             switch (dayNumber) {
                 case 0: // niedziela
@@ -67,10 +68,10 @@ const Calendar = ({year, month, handleChangeDate}) => {
 
             // 0 to niedziela a 6 to sobota
             const daysOfPastMonth = getDaysFromPastMonth(firstDay.getDay()); //dni przed 1 dniem miesiąca
-            // jezeli ostatni dzień to niedziela, to nie dodawaj kolejnych dni, inaczej oblicz ilość dni - funkcja po dwukropku
+            // jezeli ostatni dzień to niedziela, to nie dodawaj kolejnych dni, inaczej oblicz ilość dni
             const daysOfNextMonth = lastDay.getDay() === 0 ? 0 : 6 - (lastDay.getDay() - 1); //dni po ostatnim dniu miesiąca
 
-            // zakres dat dla których ma być generowany cały widok
+            // zakres dat, dla których ma być generowany cały widok
             const calendarStart = new Date(year, month, daysOfPastMonth);
             const calendarEnd = new Date(year, month + 1, daysOfNextMonth);
 
@@ -137,6 +138,7 @@ const Calendar = ({year, month, handleChangeDate}) => {
                             {day.date.getDate()}
                         </span>
                         { (day?.periodDetails?.intensivity >= 0) && <span className={`icon-asset material-symbols-outlined ${setIconClass(day.periodDetails.intensivity)}`}>done_outline</span> }
+                        {/* ikony */}
                     </button>
                 </div>
             ))
@@ -144,6 +146,7 @@ const Calendar = ({year, month, handleChangeDate}) => {
             <div className='calendar-day-details-wrapper'>
                 <DayDetails dayDetails={selectedDay} onCancel={exitDay} onSave={addDetails} />
             </div> 
+            {/* dayDetails */}
         </div>
     </>
 }

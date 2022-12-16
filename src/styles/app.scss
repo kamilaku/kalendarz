@@ -10,22 +10,6 @@ $day-margin: 2px;
 $day-padding: 5px;
 $shadow: 4px 4px 16px rgb(0 0 0 / 46%);
 
-// @media screen and (max-width: 800px) {
-//     flex-direction: column;
-// }
-
-// @media screen and (min-width: 801px) {
-//     flex-direction: row;
-//     flex-wrap: wrap;    
-// }
-
-// @media screen and (min-width: 1024px) {
-//     flex-direction: row;
-//     flex-wrap: wrap;   
-// }
-
-
-
 @mixin header-title {
     font-size: 3rem;
     margin: 70px auto 10px 30px;
@@ -52,6 +36,20 @@ $shadow: 4px 4px 16px rgb(0 0 0 / 46%);
     max-width: 800px;
     font-family: $main-font;
     color: $dark-blue;
+
+    @media screen and (max-width: 800px) {
+        flex-direction: column;
+    }
+    
+    @media screen and (min-width: 801px) {
+        flex-direction: row;
+        flex-wrap: wrap;    
+    }
+    
+    @media screen and (min-width: 1024px) {
+        flex-direction: row;
+        flex-wrap: wrap;   
+    }
 }
 
 .title {
@@ -152,6 +150,7 @@ $shadow: 4px 4px 16px rgb(0 0 0 / 46%);
     justify-content: flex-end;
     align-items: flex-end;
     padding: 30px 0px;
+    flex-wrap: wrap;
 }
 
 .select {

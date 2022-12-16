@@ -20,7 +20,7 @@ const Select = ({def, data, handleSelect, ownClass, label, name}) => {
 
     return ( 
         <div className="select-group">
-            {(label) && <label for={name}>{label}</label>}
+            {(label) && <label htmlFor={name}>{label}</label>}
             <select 
                 value={selected}
                 className={`select ${ownClass ? ownClass : ''}`} 

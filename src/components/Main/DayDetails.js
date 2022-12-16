@@ -33,10 +33,10 @@ const DayDetails = ({dayDetails, onCancel, onSave}) => {
 
     const setIntensivity = (value) => {
         setDetails({
-            ...details,
-            periodDetails: {
+            ...details,  // kopiujemy obiekt
+            periodDetails: { 
                ...details.periodDetails,
-                intensivity: Number(value), 
+                intensivity: Number(value),  // nadpisujemy
             },
         });
     };
@@ -54,7 +54,6 @@ const DayDetails = ({dayDetails, onCancel, onSave}) => {
                 intensivity: 0,
             };
         }
-        // setDetails(data);
         if (onSave) {
             onSave(data);
         }

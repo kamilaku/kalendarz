@@ -18,6 +18,7 @@ const CalendarBox = () => {
         setMonth(Number(value));
     };
 
+    //jeśli klikniemy dzień spoza aktualnego miesiąca
     const changeDate = (newDate) => {
         const newYear = Number(newDate.getFullYear());
         const newMonth = Number(newDate.getMonth());
