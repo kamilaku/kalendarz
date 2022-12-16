@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Select = ({def, data, handleSelect}) => {
+const Select = ({def, data, handleSelect, ownClass, label, name}) => {
     const [selected, setSelected] = useState(def);
 
     useEffect(() => {
@@ -19,14 +19,16 @@ const Select = ({def, data, handleSelect}) => {
     );
 
     return ( 
-        <>
+        <div className="select-group">
+            {(label) && <label for={name}>{label}</label>}
             <select 
                 value={selected}
-                className='select' 
+                className={`select ${ownClass ? ownClass : ''}`} 
                 onChange={choose}
+                id={name || ''}
             >{options}
             </select>
-        </>
+        </div>
     )
 }
 

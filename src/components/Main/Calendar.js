@@ -136,7 +136,7 @@ const Calendar = ({year, month, handleChangeDate}) => {
                         <span className='day-number'>
                             {day.date.getDate()}
                         </span>
-                        { (day?.periodDetails?.intensivity >= 0) && <span className={`icon-asset material-symbols-outlined ${setIconClass(day.periodDetails.intensivity)}`}>done</span> }
+                        { (day?.periodDetails?.intensivity >= 0) && <span className={`icon-asset material-symbols-outlined ${setIconClass(day.periodDetails.intensivity)}`}>done_outline</span> }
                     </button>
                 </div>
             ))

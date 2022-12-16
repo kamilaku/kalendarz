@@ -67,10 +67,20 @@ const DayDetails = ({dayDetails, onCancel, onSave}) => {
     return <>
         <div className='calendar-day-details' >
             <h1 className='title'>{formatDate()}</h1>
-            <h2 className='title'>{weekdays()}</h2>
+            <h3 className='title'>{weekdays()}</h3>
             <div className='calendar-day-details-but'>
-                <Select def={details?.periodDetails?.intensivity || 0} data={periodIntensivityOptions} handleSelect={setIntensivity} />
-                <button className='addPeriod' onClick={save}>Dodaj miesiączkę</button>
+                <div>
+                    <Select 
+                        ownClass={'intensivity'} 
+                        def={details?.periodDetails?.intensivity || 0} 
+                        data={periodIntensivityOptions}
+                        handleSelect={setIntensivity} 
+                        name={'intensivity'}
+                        label={'intensywność:'}
+
+                    />
+                    <button className='addPeriod' onClick={save}>Dodaj miesiączkę</button>
+                </div>
                 <button className='cancel' onClick={cancel}>Anuluj</button>
             </div>
         </div>
